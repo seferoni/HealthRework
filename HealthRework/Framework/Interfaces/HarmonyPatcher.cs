@@ -14,11 +14,11 @@ namespace HealthRework.Interfaces
 			Monitor = monitorInstance;
 		}
 
-		internal static void HealthRecoveredOnConsumption_PostFix(SObject __instance, int __result)
+		internal static void HealthRecoveredOnConsumption_PostFix(SObject __instance, ref int __result)
 		{
 			try
 			{
-				__result = Utilities.GetHealthRecoveredOnConsumption(__result);
+				__result = Utilities.GetHealthRecoveredOnConsumption(__instance, __result);
 			}
 			catch(Exception ex)
 			{

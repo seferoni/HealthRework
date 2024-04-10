@@ -7,8 +7,15 @@ namespace HealthRework.Common
 	internal sealed class Utilities
 	{
 		private static int CurrentHealth { get; set; } = 100;
-		internal static int GetHealthRecoveredOnConsumption(int healthRecovered)
+		private const string LifeElixirID = "(O)773";
+
+		internal static int GetHealthRecoveredOnConsumption(SObject consumable, int healthRecovered)
 		{
+			if (consumable.QualifiedItemId == LifeElixirID)
+			{
+				return healthRecovered;
+			}
+
 			var modifier = ModEntry.Config.HealthRecoveredFromFoodModifier * 0.01f;
 			return (int)(modifier * healthRecovered);
 		}
@@ -20,7 +27,7 @@ namespace HealthRework.Common
 
 		internal static void RestoreHealth()
 		{
-			Game1.player.health = CurrentHealth + ModEntry.Config.HealthRecoveredOnSleepOffset;
+			Game1.player.health = Math.Min(Game1.player.maxHealth, CurrentHealth + ModEntry.Config.HealthRecoveredOnSleepOffset);
 		}
 	}
 }
