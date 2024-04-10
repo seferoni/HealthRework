@@ -1,9 +1,7 @@
 ﻿using System;
 using StardewModdingAPI;
-using StardewValley;
 using SObject = StardewValley.Object;
 using HealthRework.Common;
-using System.Threading;
 
 namespace HealthRework.Interfaces
 {

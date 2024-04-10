@@ -1,7 +1,11 @@
 {
 
-	"title": "Parameters"
+	"title": "Parameters",
 
-	
+	"health_recovered_from_food_modifier": "Health Recovered From Food",
+	"health_recovered_from_food_modifier.tooltip": "Determines the percentage modifier upon which all health gained from food is multiplied.",
+
+	"health_recovered_on_sleep_offset": "Health Recovered On Sleep",
+	"health_recovered_on_sleep_offset.tooltip": "Determines the numerical value of health recovered on sleep."
 
 }

@@ -1,10 +1,10 @@
 {
-  "Name": "Food Poisoning",
+  "Name": "Health Rework",
   "Author": "seferoni",
   "Version": "1.0.0",
-  "Description": "A configurable implementation of food poisoning incurred upon the consumption of uncooked food.",
-  "UniqueID": "seferoni.FoodPoisoning",
-  "EntryDll": "FoodPoisoning.dll",
+  "Description": "A configurable rework of the health mechanic.",
+  "UniqueID": "seferoni.HealthRework",
+  "EntryDll": "HealthRework.dll",
   "MinimumApiVersion": "4.0.0",
-  "UpdateKeys": [ "Nexus:22006" ]
+  "UpdateKeys": []
 }

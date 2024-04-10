@@ -4,12 +4,13 @@ using SObject = StardewValley.Object;
 
 namespace HealthRework.Common
 {
-	internal class Utilities
+	internal sealed class Utilities
 	{
-		internal static int CurrentHealth = 100;
+		private static int CurrentHealth { get; set; } = 100;
 		internal static int GetHealthRecoveredOnConsumption(int healthRecovered)
 		{
-			return ModEntry.Config.HealthRecoveredModifier * healthRecovered;
+			var modifier = ModEntry.Config.HealthRecoveredFromFoodModifier * 0.01f;
+			return (int)(modifier * healthRecovered);
 		}
 
 		internal static void SaveCurrentHealth()

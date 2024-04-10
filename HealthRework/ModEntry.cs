@@ -62,7 +62,8 @@ namespace HealthRework
 				text: () => Helper.Translation.Get("title")
 			);
 
-			// TODO
+			configHelper.AddSetting("health_recovered_from_food_modifier", () => Config.HealthRecoveredFromFoodModifier);
+			configHelper.AddSetting("health_recovered_on_sleep_offset", () => Config.HealthRecoveredOnSleepOffset);
 		}
 	}
 }
