@@ -1,6 +1,10 @@
 ﻿#region global using directives
 
 global using System;
+global using System.Collections.Generic;
+global using SharedLibrary.Interfaces.GMCM;
+global using SharedLibrary.Integrations.GMCM;
+global using StardewModdingAPI;
 
 #endregion
 
@@ -8,14 +12,11 @@ namespace HealthRework;
 
 #region using directives
 
-using SharedLibrary.Interfaces.GMCM;
-using SharedLibrary.Integrations.GMCM;
-using StardewModdingAPI;
 using HarmonyLib;
-using SObject = StardewValley.Object;
 using StardewModdingAPI.Events;
-using HealthRework.Interfaces;
 using HealthRework.Common;
+using HealthRework.Interfaces;
+using SObject = StardewValley.Object;
 
 #endregion
 
@@ -26,13 +27,9 @@ internal sealed class ModEntry : Mod
 	public override void Entry(IModHelper helper)
 	{
 		Config = Helper.ReadConfig<ModConfig>();
-		Harmony harmonyInstance = new(ModManifest.UniqueID);
+		InitialiseHarmony();
 
-		harmonyInstance.Patch(
-			original: AccessTools.Method(typeof(SObject), nameof(SObject.healthRecoveredOnConsumption)),
-			postfix: new HarmonyMethod(typeof(HarmonyPatcher), nameof(HarmonyPatcher.HealthRecoveredOnConsumption_PostFix))
-		);
-
+		// Event subscriptions.
 		helper.Events.GameLoop.GameLaunched += GameLaunched;
 		helper.Events.GameLoop.DayEnding += DayEnding;
 		helper.Events.GameLoop.Saving += Saving;
@@ -52,17 +49,29 @@ internal sealed class ModEntry : Mod
 		SetupConfig();
 	}
 
+	private void InitialiseHarmony()
+	{
+		Harmony harmonyInstance = new(ModManifest.UniqueID);
+		HarmonyPatcher.InitialiseMonitor(Monitor);
+
+		harmonyInstance.Patch
+		(
+			original: AccessTools.Method(typeof(SObject), nameof(SObject.healthRecoveredOnConsumption)),
+			postfix: new HarmonyMethod(typeof(HarmonyPatcher), nameof(HarmonyPatcher.HealthRecoveredOnConsumption_PostFix))
+		);
+	}
+
 	private void SetupConfig()
 	{
-		var api = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
+		var GMCMInterface = Helper.ModRegistry.GetApi<IGenericModConfigMenuApi>("spacechase0.GenericModConfigMenu");
 
-		if (api is null)
+		if (GMCMInterface is null)
 		{
 			return;
 		}
 
-		GMCMHelper configHelper = new(api, Helper, ModManifest);
-		configHelper.Build(Config);
+		GMCMHelper.Initialise(GMCMInterface, Helper, ModManifest);
+		GMCMHelper.Build(Config);
 	}
 }
 

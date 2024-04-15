@@ -1,7 +1,7 @@
 {
   "Name": "Health Rework",
   "Author": "seferoni",
-  "Version": "1.0.0",
+  "Version": "1.0.1",
   "Description": "A configurable rework of the health mechanic.",
   "UniqueID": "seferoni.HealthRework",
   "EntryDll": "HealthRework.dll",

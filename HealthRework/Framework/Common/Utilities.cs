@@ -1,33 +1,34 @@
-﻿using System;
+﻿namespace HealthRework.Common;
+
+#region using directives
+
 using StardewValley;
 using SObject = StardewValley.Object;
 
-namespace HealthRework.Common
+#endregion
+
+internal static class Utilities
 {
-	internal sealed class Utilities
+	private static int CurrentHealth { get; set; } = 100;
+	private static string LifeElixirID { get; } = "(O)773";
+
+	internal static int GetHealthRecoveredOnConsumption(SObject consumable, int healthRecovered)
 	{
-		private static int CurrentHealth { get; set; } = 100;
-		private const string LifeElixirID = "(O)773";
-
-		internal static int GetHealthRecoveredOnConsumption(SObject consumable, int healthRecovered)
+		if (consumable.QualifiedItemId == LifeElixirID)
 		{
-			if (consumable.QualifiedItemId == LifeElixirID)
-			{
-				return healthRecovered;
-			}
-
-			var modifier = ModEntry.Config.HealthRecoveredFromFoodModifier * 0.01f;
-			return (int)(modifier * healthRecovered);
+			return healthRecovered;
 		}
 
-		internal static void SaveCurrentHealth()
-		{
-			CurrentHealth = Game1.player.health;
-		}
+		return (int)(ModEntry.Config.HealthRecoveredFromFoodModifier * healthRecovered);
+	}
 
-		internal static void RestoreHealth()
-		{
-			Game1.player.health = Math.Min(Game1.player.maxHealth, CurrentHealth + ModEntry.Config.HealthRecoveredOnSleepOffset);
-		}
+	internal static void SaveCurrentHealth()
+	{
+		CurrentHealth = Game1.player.health;
+	}
+
+	internal static void RestoreHealth()
+	{
+		Game1.player.health = Math.Min(Game1.player.maxHealth, CurrentHealth + ModEntry.Config.HealthRecoveredOnSleepOffset);
 	}
 }
