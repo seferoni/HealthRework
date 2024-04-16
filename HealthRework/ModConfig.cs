@@ -8,7 +8,7 @@ using SharedLibrary.Classes;
 
 public sealed class ModConfig : ConfigClass
 {
-	internal Dictionary<string, dynamic> _Defaults = new()
+	private readonly Dictionary<string, dynamic> _Defaults = new()
 	{
 		{ "HealthRecoveredFromFoodModifier", 0f },
 		{ "HealthRecoveredOnSleepOffset", 10 }
