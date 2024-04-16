@@ -8,12 +8,12 @@ using SharedLibrary.Classes;
 
 public sealed class ModConfig : ConfigClass
 {
-	internal Dictionary<string, IComparable> _Defaults = new()
+	internal Dictionary<string, dynamic> _Defaults = new()
 	{
 		{ "HealthRecoveredFromFoodModifier", 0 },
 		{ "HealthRecoveredOnSleepOffset", 10 }
 	};
-	internal override Dictionary<string, IComparable> Defaults
+	internal override Dictionary<string, dynamic> Defaults
 	{
 		get
 		{
