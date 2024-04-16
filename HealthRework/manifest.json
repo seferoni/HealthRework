@@ -2,7 +2,7 @@
   "Name": "Health Rework",
   "Author": "seferoni",
   "Version": "1.0.1",
-  "Description": "A configurable rework of the health mechanic.",
+  "Description": "A configurable rework of the health mechanic, designed to encourage preparation and heighten consequences for dangerous encounters.",
   "UniqueID": "seferoni.HealthRework",
   "EntryDll": "HealthRework.dll",
   "MinimumApiVersion": "4.0.0",
