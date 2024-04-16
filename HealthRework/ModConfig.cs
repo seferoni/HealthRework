@@ -10,7 +10,7 @@ public sealed class ModConfig : ConfigClass
 {
 	internal Dictionary<string, dynamic> _Defaults = new()
 	{
-		{ "HealthRecoveredFromFoodModifier", 0 },
+		{ "HealthRecoveredFromFoodModifier", 0f },
 		{ "HealthRecoveredOnSleepOffset", 10 }
 	};
 	internal override Dictionary<string, dynamic> Defaults
