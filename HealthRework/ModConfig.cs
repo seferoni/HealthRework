@@ -13,6 +13,8 @@ public sealed class ModConfig : ConfigClass
 		{ "HealthRecoveredFromFoodModifier", 0f },
 		{ "HealthRecoveredOnSleepOffset", 10 }
 	};
+
+	[GMCMIgnore]
 	internal override Dictionary<string, dynamic> Defaults
 	{
 		get
