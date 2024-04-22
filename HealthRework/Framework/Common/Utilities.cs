@@ -10,11 +10,10 @@ using SObject = StardewValley.Object;
 internal static class Utilities
 {
 	private static int CurrentHealth { get; set; } = 100;
-	private static string LifeElixirID { get; } = "(O)773";
 
 	internal static int GetHealthRecoveredOnConsumption(SObject consumable, int healthRecovered)
 	{
-		if (consumable.QualifiedItemId == LifeElixirID)
+		if (consumable.QualifiedItemId == GetLifeElixirID())
 		{
 			return healthRecovered;
 		}
@@ -30,5 +29,10 @@ internal static class Utilities
 	internal static void RestoreHealth()
 	{
 		Game1.player.health = Math.Min(Game1.player.maxHealth, CurrentHealth + ModEntry.Config.HealthRecoveredOnSleepOffset);
+	}
+
+	internal static string GetLifeElixirID()
+	{
+		return "(O)773";
 	}
 }

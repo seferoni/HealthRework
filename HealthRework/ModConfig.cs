@@ -8,14 +8,14 @@ using SharedLibrary.Classes;
 
 public sealed class ModConfig : ConfigClass
 {
-	private readonly Dictionary<string, dynamic> _Defaults = new()
+	private readonly Dictionary<string, object> _Defaults = new()
 	{
 		{ "HealthRecoveredFromFoodModifier", 0f },
 		{ "HealthRecoveredOnSleepOffset", 10 }
 	};
 
 	[GMCMIgnore]
-	internal override Dictionary<string, dynamic> Defaults
+	internal override Dictionary<string, object> Defaults
 	{
 		get
 		{

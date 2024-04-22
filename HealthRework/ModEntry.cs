@@ -26,8 +26,7 @@ internal sealed class ModEntry : Mod
 
 	public override void Entry(IModHelper helper)
 	{
-		Config = Helper.ReadConfig<ModConfig>();
-		InitialiseHarmony();
+		Initialise();
 
 		// Event subscriptions.
 		helper.Events.GameLoop.GameLaunched += GameLaunched;
@@ -47,6 +46,12 @@ internal sealed class ModEntry : Mod
 	private void GameLaunched(object? sender, GameLaunchedEventArgs e)
 	{
 		SetupConfig();
+	}
+
+	private void Initialise()
+	{
+		Config = Helper.ReadConfig<ModConfig>();
+		InitialiseHarmony();
 	}
 
 	private void InitialiseHarmony()
